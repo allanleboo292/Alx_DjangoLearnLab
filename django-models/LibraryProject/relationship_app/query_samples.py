@@ -13,10 +13,11 @@ def books_in_library(library_name):
         print(book.title)
 
 def librarian_for_library(library_name):
-    library = Library.objects.get(name=library_name)
-    librarian = library.librarian
-    print(f"Librarian for {library.name}: {librarian.name}")
-
+    try:
+        librarian = Librarian.objects.get(library__name=library_name)
+        print(f"Librarian for {library_name}: {librarian.name}")
+    except Librarian.DoesNotExist:
+        print(f"No librarian found for {library_name}")
 if __name__ == "__main__":
     books_by_author('J.K. Rowling')
     books_in_library('City Library')
