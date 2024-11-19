@@ -16,7 +16,7 @@ def list_books(request):
 
 class LibraryDetailView(DetailView):
     model = Library
-    template_name = 'library_detail.html'
+    template_name = 'relationship_app/library_detail.html'
     context_object_name = 'library'
 
 def register(request):
@@ -25,7 +25,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('list_books')  # Redirect to a valid URL in your project
+            return redirect('list_books') 
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
