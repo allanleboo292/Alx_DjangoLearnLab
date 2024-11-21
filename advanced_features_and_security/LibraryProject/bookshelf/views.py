@@ -56,9 +56,7 @@ def edit_book(request, pk):
     return render(request, 'bookshelf/edit_book.html', {'book': book})
 
 @permission_required('bookshelf.can_delete', raise_exception=True)
-def delete_book(request, pk):
-    book = get_object_or_404(Book, pk=pk)
-    if request.method == 'POST':
-        book.delete()
-        # Redirect to book list after deletion
-    return render(request, 'bookshelf/delete_book.html', {'book': book})
+def book_list(request):
+    # Get all books from the database
+    books = Book.objects.all()
+    return render(request, 'bookshelf/book_list.html', {'books': books})
