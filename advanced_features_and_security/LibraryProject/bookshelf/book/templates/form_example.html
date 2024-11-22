@@ -1,0 +1,6 @@
+<form method="post" action="/your_action_url/">
+    {% csrf_token %}
+    <label for="author">Author:</label>
+    <input type="text" name="author" id="author" required>
+    <button type="submit">Search</button>
+</form>

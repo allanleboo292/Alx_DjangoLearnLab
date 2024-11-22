@@ -1,0 +1,17 @@
+<h1>Search for Books</h1>
+<form method="post" action="{% url 'search_books' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Search</button>
+</form>
+
+{% if books %}
+    <h2>Search Results:</h2>
+    <ul>
+        {% for book in books %}
+            <li>{{ book.title }} by {{ book.author }}</li>
+        {% endfor %}
+    </ul>
+{% elif books is not None %}
+    <p>No books found.</p>
+{% endif %}

@@ -60,3 +60,18 @@ def book_list(request):
     # Get all books from the database
     books = Book.objects.all()
     return render(request, 'bookshelf/book_list.html', {'books': books})
+
+from django.shortcuts import render
+from .models import Book
+from .forms import BookSearchForm
+
+def search_books(request):
+    if request.method == 'POST':
+        form = BookSearchForm(request.POST)
+        if form.is_valid():
+            author = form.cleaned_data['author']
+            books = Book.objects.filter(author__icontains=author)
+            return render(request, 'bookshelf/book_list.html', {'books': books, 'form': form})
+    else:
+        form = BookSearchForm()
+    return render(request, 'bookshelf/book_list.html', {'form': form})
