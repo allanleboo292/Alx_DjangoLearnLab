@@ -144,3 +144,17 @@ CSP_STYLE_SRC = ["'self'", "https://trusted-styles.com"]
 MIDDLEWARE += [
     'csp.middleware.CSPMiddleware',
 ]
+# Enforce HTTPS connections
+SECURE_SSL_REDIRECT = True  # Redirect all non-HTTPS requests to HTTPS
+SECURE_HSTS_SECONDS = 31536000  # Enforce HTTPS for one year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS policy to all subdomains
+SECURE_HSTS_PRELOAD = True  # Allow preloading of the HSTS policy
+
+# Secure cookies
+SESSION_COOKIE_SECURE = True  # Ensure session cookies are sent over HTTPS only
+CSRF_COOKIE_SECURE = True  # Ensure CSRF cookies are sent over HTTPS only
+
+# Secure headers
+X_FRAME_OPTIONS = 'DENY'  # Protect against clickjacking
+SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevent browsers from MIME-sniffing
+SECURE_BROWSER_XSS_FILTER = True  # Enable the browser's XSS filter
