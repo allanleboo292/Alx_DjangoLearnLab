@@ -75,3 +75,16 @@ def search_books(request):
     else:
         form = BookSearchForm()
     return render(request, 'bookshelf/book_list.html', {'form': form})
+from django.shortcuts import render
+from .forms import ExampleForm
+
+def example_form_view(request):
+    if request.method == "POST":
+        form = ExampleForm(request.POST)
+        if form.is_valid():
+            # Handle the valid form (e.g., save data or send email)
+            return render(request, "bookshelf/success.html")
+    else:
+        form = ExampleForm()
+
+    return render(request, "bookshelf/form_example.html", {"form": form})
