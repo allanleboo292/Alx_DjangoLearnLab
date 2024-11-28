@@ -74,4 +74,4 @@ class BookListView(generics.ListCreateAPIView):
     filterset_class = BookFilter  # Apply custom filter set to this view
     search_fields = ['title', 'author']  # Allow searching by title and author
     ordering_fields = ['title', 'publication_year']  # Allow ordering by title and publication year
-    ordering = ['title']  # Default ordering by title
+    filters.OrderingFilter= ['title']  # Default ordering by title
