@@ -72,6 +72,6 @@ class BookListView(generics.ListCreateAPIView):
     
     filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)  # Ensure OrderingFilter is included
     filterset_class = BookFilter  # Apply custom filter set to this view
-    search_fields = ['title', 'author']  # Allow searching by title and author
+    filters.SearchFilter= ['title', 'author']  # Allow searching by title and author
     ordering_fields = ['title', 'publication_year']  # Allow ordering by title and publication year
     filters.OrderingFilter= ['title']  # Default ordering by title
