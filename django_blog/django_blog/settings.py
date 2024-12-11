@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'django_blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'your_database_name',
-        'USER': 'your_database_user',
-        'PASSWORD': 'your_database_password',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'allan',
         'HOST': 'localhost',  # Or the IP of your PostgreSQL server
         'PORT': '5432',       # Default PostgreSQL port
     }
@@ -150,3 +150,9 @@ TEMPLATES = [
         },
     },
 ]
+# settings.py
+
+LOGIN_REDIRECT_URL = 'profile'  # Redirect to profile after login
+# settings.py
+
+LOGOUT_REDIRECT_URL = 'login'  # Redirect to login after logout
