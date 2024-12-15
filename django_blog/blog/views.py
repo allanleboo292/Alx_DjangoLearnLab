@@ -136,7 +136,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import CreateView, UpdateView, DeleteView
-from .models import Post, Comment
+from .models import Post, Comment, Tag
 
 # Existing Post views remain unchanged...
 
@@ -182,3 +182,23 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('post-detail', kwargs={'pk': self.object.post.pk})
+from django.db.models import Q
+from django.shortcuts import render
+from .models import Post
+
+def search(request):
+    query = request.GET.get('q', '')
+    if query:
+        posts = Post.objects.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(tags__name__icontains=query)
+        ).distinct()
+    else:
+        posts = Post.objects.all()
+
+    return render(request, 'blog/search_results.html', {'posts': posts, 'query': query})
+def tag_posts(request, tag_name):
+    tag = Tag.objects.get(name=tag_name)
+    posts = Post.objects.filter(tags=tag)
+    return render(request, 'blog/tag_posts.html', {'posts': posts, 'tag': tag})
