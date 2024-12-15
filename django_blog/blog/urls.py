@@ -13,8 +13,9 @@ urlpatterns = [
     path('profile/update/', views.update_profile, name='update_profile'),
     path('', PostListView.as_view(), name='post-list'),
     path('<int:pk>/', PostDetailView.as_view(), name='post-detail'),
-    path('new/', PostCreateView.as_view(), name='post-create'),
-    path('<int:pk>/edit/', PostUpdateView.as_view(), name='post-update'),
-    path('<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
+    path('post/new/', PostCreateView.as_view(), name='post-new'),  # Ensure this exists
+    path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),  # Ensure this exists
+    path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),  # Ensure this exists
 ]
+
 
